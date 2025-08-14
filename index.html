@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Acme Consulting — Growth for Small Businesses</title>
+  <meta name="description" content="Practical consulting for small businesses: strategy, finance, and operations. Free discovery call.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b1020;          /* deep navy */
+      --ink:#101321;         /* dark text */
+      --ink-2:#5b6075;       /* muted text */
+      --brand:#5866ff;       /* electric indigo */
+      --brand-2:#7b50ff;     /* violet */
+      --surface:#ffffff;     /* card bg */
+      --soft:#f4f6fb;        /* soft gray */
+      --ok:#0ea5e9;          /* accent */
+      --max:1200px;
+      --radius:16px;
+      --shadow:0 10px 30px rgba(16,19,33,.08);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:#fff;line-height:1.6}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:var(--max);margin:auto;padding:0 20px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.85rem 1.1rem;border-radius:999px;font-weight:600;border:1px solid transparent;transition:.2s}
+    .btn-primary{background:linear-gradient(90deg,var(--brand),var(--brand-2));color:#fff;box-shadow:0 10px 20px rgba(88,102,255,.25)}
+    .btn-primary:hover{transform:translateY(-1px);box-shadow:0 14px 30px rgba(88,102,255,.35)}
+    .btn-ghost{background:#fff;border-color:#e7e9f3}
+
+    /* Header */
+    header{position:sticky;top:0;background:#fff;border-bottom:1px solid #eef0f6;z-index:50}
+    .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+    .logo{display:flex;align-items:center;gap:.6rem;font-weight:800}
+    .logo-dot{width:10px;height:10px;border-radius:50%;background:linear-gradient(90deg,var(--brand),var(--ok))}
+    nav ul{display:flex;gap:1.2rem;list-style:none;margin:0;padding:0}
+    .nav-cta{display:flex;gap:.75rem;align-items:center}
+
+    /* Mobile menu */
+    .burger{display:none;flex-direction:column;gap:4px}
+    .burger span{width:22px;height:2px;background:#2a2f45;border-radius:2px}
+    #mobile{display:none}
+    #mobile.open{display:block}
+    #mobile ul{list-style:none;padding:12px 0;margin:0}
+    #mobile a{display:block;padding:10px 0;border-top:1px solid #eef0f6}
+
+    /* Hero */
+    .hero{background:linear-gradient(180deg,#f7f9ff, #ffffff);padding:72px 0 32px}
+    .hero-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:36px;align-items:center}
+    .eyebrow{color:var(--brand);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.8rem}
+    h1{font-size:clamp(1.9rem,4.2vw,3.1rem);line-height:1.08;margin:.5rem 0 1rem}
+    .sub{font-size:1.05rem;color:var(--ink-2);max-width:58ch}
+    .hero-actions{display:flex;gap:.75rem;margin-top:1.25rem;flex-wrap:wrap}
+    .hero-figure{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+    .hero-figure img{width:100%;height:100%;object-fit:cover;display:block}
+
+    /* Trust bar */
+    .trust{padding:24px 0 8px;color:#7a7f92}
+    .trust .row{display:grid;grid-template-columns:repeat(5,1fr);gap:20px;align-items:center;opacity:.75}
+    .trust .logo{justify-content:center;font-weight:700;color:#a3a8bb}
+
+    /* Sections */
+    section{padding:60px 0}
+    .section-title{font-size:clamp(1.4rem,3vw,2rem);margin:0 0 8px}
+    .section-sub{color:var(--ink-2);margin:0 0 24px}
+
+    /* Services */
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{background:var(--surface);border:1px solid #eef0f6;border-radius:14px;padding:20px;box-shadow:var(--shadow)}
+    .card h3{margin:.2rem 0 .4rem;font-size:1.15rem}
+    .card p{margin:0;color:var(--ink-2)}
+
+    /* Process */
+    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .step{background:var(--soft);border-radius:14px;padding:20px;border:1px dashed #e1e4ef}
+    .step b{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:999px;background:#e9ecff;color:#4353ff;margin-right:.5rem}
+
+    /* Testimonials */
+    .testimonials{background:#fafbff;border-top:1px solid #eef0f6;border-bottom:1px solid #eef0f6}
+    .quotes{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+    .quote{background:#fff;border:1px solid #eef0f6;border-radius:14px;padding:20px;box-shadow:var(--shadow)}
+    .quote p{margin:0}
+    .quote .who{margin-top:.8rem;color:var(--ink-2);font-size:.95rem}
+
+    /* CTA banner */
+    .cta{background:linear-gradient(90deg,var(--brand),var(--brand-2));color:#fff;border-radius:18px;padding:28px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .cta h3{margin:0;font-size:clamp(1.2rem,2.8vw,1.8rem)}
+
+    /* Footer */
+    footer{background:#0e1330;color:#c8ccdb;padding:40px 0}
+    .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:28px}
+    footer h4{margin:.2rem 0 .6rem;color:#fff}
+    footer p, footer a{color:#c8ccdb;margin:.25rem 0}
+    .small{font-size:.9rem;color:#9aa0b6}
+    .copyright{border-top:1px solid #20264a;margin-top:26px;padding-top:16px;color:#8f95ad}
+
+    /* Responsive */
+    @media (max-width: 960px){
+      .hero-grid{grid-template-columns:1fr;gap:18px}
+      .trust .row{grid-template-columns:repeat(3,1fr)}
+      .cards{grid-template-columns:repeat(2,1fr)}
+      .steps{grid-template-columns:repeat(2,1fr)}
+      .quotes{grid-template-columns:1fr}
+      .footer-grid{grid-template-columns:1fr 1fr}
+      .nav ul{display:none}
+      .burger{display:flex}
+      #mobile{background:#fff;border-top:1px solid #eef0f6}
+    }
+    @media (max-width: 560px){
+      .cards,.steps{grid-template-columns:1fr}
+      .trust .row{grid-template-columns:repeat(2,1fr)}
+      .footer-grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container nav">
+      <a href="#" class="logo"><span class="logo-dot"></span> Acme Consulting</a>
+      <nav>
+        <ul>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#process">Process</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="nav-cta">
+        <a class="btn btn-ghost" href="#services">See services</a>
+        <a class="btn btn-primary" href="#contact">Get free consult</a>
+        <button class="burger" aria-label="Open menu" onclick="document.getElementById('mobile').classList.toggle('open')">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div id="mobile" class="container">
+      <ul>
+        <li><a href="#services" onclick="document.getElementById('mobile').classList.remove('open')">Services</a></li>
+        <li><a href="#process" onclick="document.getElementById('mobile').classList.remove('open')">Process</a></li>
+        <li><a href="#about" onclick="document.getElementById('mobile').classList.remove('open')">About</a></li>
+        <li><a href="#contact" onclick="document.getElementById('mobile').classList.remove('open')">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow">Consulting for small businesses</div>
+        <h1>Turn your operations into a growth engine</h1>
+        <p class="sub">We help entrepreneurs and small teams improve cash flow, pricing, processes, and customer experience — with quick wins in weeks, not months.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="https://forms.office.com/" target="_blank" rel="noopener">Book a free call</a>
+          <a class="btn btn-ghost" href="#services">Explore services</a>
+        </div>
+      </div>
+      <div class="hero-figure">
+        <img src="hero-placeholder.jpg" alt="Advisors collaborating with a small business owner">
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Bar -->
+  <section class="trust">
+    <div class="container">
+      <div class="row">
+        <div class="logo">• LOGO •</div>
+        <div class="logo">• LOGO •</div>
+        <div class="logo">• LOGO •</div>
+        <div class="logo">• LOGO •</div>
+        <div class="logo">• LOGO •</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services">
+    <div class="container">
+      <h2 class="section-title">Services tailored for SMBs</h2>
+      <p class="section-sub">Pick a focused engagement or combine modules to fit your needs.</p>
+      <div class="cards">
+        <div class="card">
+          <h3>Cash Flow & Pricing</h3>
+          <p>Revenue mapping, margin analysis, pricing tests, and cash management playbook.</p>
+        </div>
+        <div class="card">
+          <h3>Process & Operations</h3>
+          <p>Lean workflows, SOPs, vendor optimization, and automation with Microsoft/Google tools.</p>
+        </div>
+        <div class="card">
+          <h3>Go‑to‑Market Boost</h3>
+          <p>Offer design, ICP, messaging, and simple funnels that convert visitors into leads.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section id="process">
+    <div class="container">
+      <h2 class="section-title">How we work (simple)</h2>
+      <p class="section-sub">Fast discovery, focused sprints, measurable outcomes.</p>
+      <div class="steps">
+        <div class="step"><p><b>1</b> Free 30‑min discovery to map goals and constraints.</p></div>
+        <div class="step"><p><b>2</b> 2–4 week sprint to deliver quick wins and a clear roadmap.</p></div>
+        <div class="step"><p><b>3</b> Optional monthly support to keep momentum.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials">
+    <div class="container">
+      <h2 class="section-title">Owners who leveled up</h2>
+      <div class="quotes">
+        <div class="quote">
+          <p>“We improved margins in 6 weeks and finally have a handle on cash flow.”</p>
+          <div class="who">— Retail founder, 12 employees</div>
+        </div>
+        <div class="quote">
+          <p>“They simplified our operations so much we cut delivery times by 30%.”</p>
+          <div class="who">— D2C brand, 8 employees</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA banner -->
+  <section class="container" id="about">
+    <div class="cta">
+      <h3>Let’s map your next 90 days of growth.</h3>
+      <a class="btn btn-primary" href="https://forms.office.com/" target="_blank" rel="noopener">Get a free consult</a>
+    </div>
+  </section>
+
+  <!-- Contact / Form -->
+  <section id="contact">
+    <div class="container">
+      <h2 class="section-title">Contact</h2>
+      <p class="section-sub">Prefer email? <a href="mailto:hello@yourconsulting.com">hello@yourconsulting.com</a></p>
+      <!-- Replace the src below with your Microsoft Forms embed URL -->
+      <div class="hero-figure" style="max-width:820px;margin:10px auto 0">
+        <iframe title="Contact form" src="https://forms.office.com/" width="100%" height="520" style="border:0"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <h4>Acme Consulting</h4>
+        <p class="small">We help small businesses install the systems that drive growth — from pricing and cash flow to operations and customer experience.</p>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <p><a href="#services">Services</a></p>
+        <p><a href="#process">Process</a></p>
+        <p><a href="#about">About</a></p>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <p><a href="mailto:hello@yourconsulting.com">hello@yourconsulting.com</a></p>
+        <p>+1 (555) 555-1234</p>
+      </div>
+    </div>
+    <div class="container copyright">
+      © <span id="y"></span> Acme Consulting. All rights reserved.
+    </div>
+  </footer>
+
+  <script>
+    // Year
+    document.getElementById('y').textContent = new Date().getFullYear()
+  </script>
+</body>
+</html>
